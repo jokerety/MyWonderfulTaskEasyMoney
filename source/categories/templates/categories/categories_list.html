@@ -3,6 +3,13 @@
 
 
 {% block content %}
+    <a href="{% url "categories:category_create" %}">Создать новую</a>
+    <div>
+    <form action="" method = "get">
+        {{ form }}
+        <input type="submit" value="search">
+    </form>
+    </div>
     {% for category in categories %}
         <a href="{% url "categories:category_detail" pk=category.id %} ">{{ category.name }}</a>
         <br>

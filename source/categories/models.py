@@ -8,7 +8,7 @@ from django.conf import settings
 class Category(models.Model):
 
     name = models.CharField(max_length=255, blank=True, null=True)
-
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
     def __unicode__(self):
         return self.name
 

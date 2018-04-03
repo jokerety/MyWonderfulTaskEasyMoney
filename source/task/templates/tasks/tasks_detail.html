@@ -6,8 +6,12 @@
 
     <div>
          {{ task.name }}
+
+        <a href = "{%  url "task:task_edit" pk=task.id %}"><br>Редактировать</a>
+
         <br>
         {{ task.prescription }}
+
 
     </div>
 {% endblock %}
