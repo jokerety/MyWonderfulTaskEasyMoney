@@ -1,10 +1,73 @@
-<h1>MyTaskSolver v1</h1>
 
+{% load static %}
 
-<h1>{%  block title %}All the tasks:{% endblock %}</h1>
+<!doctype html>
 
-<div>
-    {% block content %}{% endblock %}
-</div>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="{% static "bootstrap-4.1.1/favicon.ico" %}">
 
-<h1>Copyleft @RomanMaslov</h1>
+    <title> {% block title %}TaskSolver{% endblock %} </title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static "bootstrap-4.1.1/dist/css/bootstrap.min.css" %}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    {% block CUSTOME_STYLES %}{% endblock %}
+    <link href="{% static "bootstrap-4.1.1/docs/4.1/examples/sticky-footer-navbar/sticky-footer-navbar.css" %}" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <header>
+      <!-- Fixed navbar -->
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+          <a class="navbar-brand" href="#">TaskSolver</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+              <ul class="navbar-nav ml-auto">
+                  {% if user.is_authenticated  %}
+                      <li class="nav-item">
+                          <a class="nav-link" href="{% url "core:logout" %}">Выйти</a>
+                      </li>
+                  {% else %}
+                      <li class="nav-item">
+                          <a class="nav-link" href="{% url "core:login" %}">Войти</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="{% url "core:register" %}">Зарегестрироваться</a>
+                      </li>
+                  {% endif %}
+              </ul>
+          </div>
+      </nav>
+    </header>
+
+    <!-- Begin page content -->
+    <main role="main" class="container">
+        {% block content %}
+            Default content
+        {% endblock %}
+    </main>
+
+    <footer class="footer">
+        {% block footer %}
+        <div class="container">
+            <span class="text-muted">@Copyleft Maslov Roman TaskSolver</span>
+        </div>
+        {% endblock %}
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{% static "bootstrap-4.1.1/assets/js/vendor/jquery-slim.min.js" %}"></script>
+    <script src="{% static "bootstrap-4.1.1/assets/js/vendor/popper.min.js" %}"></script>
+    <script src="{% static "bootstrap-4.1.1/dist/js/bootstrap.min.js" %}"></script>
+  </body>
+</html>

@@ -29,7 +29,7 @@ urlpatterns = [
     url(r'^rating/$', rating),
     url(r'^task/', include ('task.urls', namespace='task')),
     url(r'^userman/', userman),
-    url(r'^categories/',include ('categories.urls', namespace= 'categories')),
-
+    url(r'^categories/',include ('categories.urls', namespace='categories')),
+    url(r'^', include ('core.urls', namespace='core')),
 
 ]

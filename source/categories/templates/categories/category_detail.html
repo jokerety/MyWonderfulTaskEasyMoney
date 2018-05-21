@@ -1,16 +1,18 @@
 {% extends "categories/base_categories.html" %}
 
 {%  block content %}
-    <a href="{% url "categories:categories_list" %}">All categories</a>
+   <a href="{% url "categories:categories_list" %}">Назад</a>
     <br>
-   {{ category.name }}
-    <a href = "{%  url "categories:category_edit" pk=category.id %}">Редактировать</a>
-    <br>
-    <br>
-    <div>
-        {% for task in tasks %}
-            <div> <a href="{% url "task:task_detail" pk=task.id %}">{{ task }}</a> <i> {{ task.created|date:"Y-m-d" }}</i></div>
+   <h3>Категория: {{ category.name }}</h3>
 
+    <div class ="row">
+        {% for task in tasks %}
+            <div class="col-md-12">
+                <div class ="card card-block bg-faded mt-2">
+                    <p class = "p-1"><a class="card-link" href="{% url "task:task_detail" pk=task.id %}">{{ task }}</a></p>
+                    <p class = "p-1"><i class="float-right"> {{ task.created|date:"Y-m-d" }}</i></p>
+                </div>
+            </div>
         {% endfor %}
 
     </div>

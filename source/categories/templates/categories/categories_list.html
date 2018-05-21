@@ -1,18 +1,35 @@
 
 {% extends "core/base.html" %}
 
-
+{% block title %} Категории - {{ block.super }} {% endblock %}
 {% block content %}
-    <a href="{% url "categories:category_create" %}">Создать новую</a>
-    <div>
-    <form action="" method = "get">
-        {{ form }}
-        <input type="submit" value="search">
-    </form>
+    <a class = "btn btn-primary float-right" href="{% url "categories:category_create"%}">Создать новую</a>
+
+    <h3>Категории заданий</h3>
+
+    <div class="row mb-2">
+        <form action="" method = "get">
+            <div class="col-md-12">
+                <div class="form-row">
+                    <div class="col">
+                        {{ form }}
+                        <input type="submit" value="search">
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
-    {% for category in categories %}
-        <a href="{% url "categories:category_detail" pk=category.id %} ">{{ category.name }}</a>
-        <br>
-    {% endfor %}
-    {{  username }}
+    <div class="row">
+        {% for category in categories %}
+            <div class="col-md-12">
+                <div class ="card card-block bg-faded mt-2">
+                    <p class="p-1"><a class="card-link" href="{% url "categories:category_detail" pk=category.id %} "> {{ category.name }}</a></p>
+                    <p class="p-1">{{ category.description }}</p>
+                    <p class="p-1"><a class="float-right" href = "{%  url "categories:category_edit" pk=category.id %}">Редактировать название</a></p>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+
 {%  endblock %}

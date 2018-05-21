@@ -1,5 +1,5 @@
 
-from django.conf.urls import url, include
+from django.conf.urls import url
 from django.contrib import admin
 
 from task.views import task_list,task_detail, TaskCreate, TaskEdit

@@ -4,13 +4,59 @@
 {%  block content %}
     <a href="{% url "categories:categories_list"  %}">Back</a>
 
-    <div>
-         {{ task.name }}
+    <div class = "row">
+        <div class="col-md-12">
+             <h3>Название задания: {{ task.name }}</h3>
 
-        <a href = "{%  url "task:task_edit" pk=task.id %}"><br>Редактировать</a>
+                 <p class = "p-1"><a class="float-left" href = "{%  url "task:task_edit" pk=task.id %}">Редактировать название</a></p>
+                 <p class = "p-1">{{ task.prescription }}</p>
+
+            <h3>Комментарии:</h3>
+        </div>
+        {%  for current_comment in comments %}
+            <div class="col-md-12">
+                <div class ="card card-block bg-faded mt-2">
+                    <p class = "p-1">{{ current_comment.author.username }} : {{ current_comment.text }}</p>
+                    <p class = "p-1">{{ current_comment.created }}</p>
+                </div>
+            </div>
+        {% endfor %}
+        <form action="" method = "post">
+                {% csrf_token %}
+                <input type="submit" value='Добавить комментарий'>
+                <input type="text" name="comment">
+                <input type="text" value='comment' hidden name = 'type'>
+                </form>
+        <br>
+        {% for user in task.usertask.all %}
+            <div class="col-md-12">
+                <div class ="card card-block bg-faded mt-2">
+                    <p class = "p-1"> Задание взял:  {{ user.username }} </p>
+                </div>
+            </div>
+        {% endfor %}
+
 
         <br>
-        {{ task.prescription }}
+        {% if task.is_finished == True %}
+            Задание завершено, всем спасибо!
+
+        {% elif task.is_finished == False%}
+            <form action="" method = "get">
+            {% csrf_token %}
+            <input type="submit" value='Взять задание'>
+            </form>
+
+            <br>
+             {% if user.is_superuser %}
+                <form action="" method = "post">
+                {% csrf_token %}
+                <input type="submit" value='Закрыть задание'>
+                <input type="text" value='close' hidden name = 'type'>
+                </form>
+            {% endif %}
+
+        {%  endif%}
 
 
     </div>

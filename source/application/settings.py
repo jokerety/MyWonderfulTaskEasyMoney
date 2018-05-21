@@ -42,8 +42,9 @@ INSTALLED_APPS = [
     'rating.apps.RatingConfig',
     'task.apps.TaskConfig',
     'userman.apps.UsermanConfig',
-    'categories.apps.CategoriesConfig'
-
+    'categories.apps.CategoriesConfig',
+    'comments.apps.CommentsConfig',
+    'crispy_forms',
 ]
 
 AUTH_USER_MODEL = 'core.User'
@@ -130,3 +131,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
